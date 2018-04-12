@@ -4,7 +4,7 @@ Self-Driving Car Engineer Nanodegree Program
 ---
 
 ## Compile
-This project could be compile build and run well on Linux(ubuntu) by following instructions provided. However failed to do that on my MAC OS X due to some libary problems. 
+This project could be compile build and run well on Linux(ubuntu) by following instructions provided. 
 
 ## The Model 
 For the car with a state vector S = $(x, y, \psi, v)$. The kinematic model can be expressed as following equations:
@@ -29,16 +29,19 @@ Line 103 - 109 in MPC.cpp reflects the model update in the code.
 
 ## Timestep Length and Elapsed Duration
 
-Time horizon T = N * dt here N is 10 and dt is 0.1.
+Time horizon T = N * dt here N is 10 and dt is 0.1. Other combinations have been tried were proven that easy to cause the car behavior wierd. A length of 100ms time step is also consistent with latency.
 
 
 ## Polynomial Fitting and MPC Preprocessing
+From line 99 - 120 in main.cpp, I preprocessed waypoints to vehicle's cordinate system also with state vector, then used the provide utils to fitting the polynomial. 
 
 ## Model Predictive Control with Latency
+Since the timestep and latency is consistent, which is 100ms, we are able to use previous step's actuations to apply to current step.
+
 
 ## Simulation
 
-Simulation looks well, car can run
+Simulation looks well, car can run and run over laps within the track. 
 
 ---
 
