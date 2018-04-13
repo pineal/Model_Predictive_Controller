@@ -93,8 +93,8 @@ class FG_eval {
       AD<double> cte0 = vars[cte_start + i - 1];
       AD<double> epsi0 = vars[epsi_start + i - 1];
 
-      AD<double> delta0 = vars[delta_start + i - 1];
-      AD<double> a0 = vars[a_start + i - 1];
+      AD<double> delta0 = vars[i == 1? delta_start + i - 1 : delta_start + i - 2];
+      AD<double> a0 = vars[i == 1? a_start + i - 1 : a_start + i - 2];
 
       AD<double> f0 = coeffs[3] * pow(x0, 3) + coeffs[2] * pow(x0, 2) + coeffs[1] * x0 + coeffs[0];
       AD<double> psides0 = CppAD::atan(3 * coeffs[3] * CppAD::pow(x0, 2) + 2 * coeffs[2] * x0 + coeffs[1]);
@@ -103,7 +103,7 @@ class FG_eval {
       // Model Constraints
       fg[1 + x_start + i] = x1 - (x0 + v0 * CppAD::cos(psi0) * (dt + latency));
       fg[1 + y_start + i] = y1 - (y0 + v0 * CppAD::sin(psi0) * (dt + latency));
-      fg[1 + psi_start + i] = psi1 - (psi0 - v0 * delta0 / Lf * (dt + latency) );  
+      fg[1 + psi_start + i] = psi1 - (psi0 + v0 * delta0 / Lf * (dt + latency) );  
       fg[1 + v_start + i] = v1 - (v0 + a0 * (dt + latency));
       fg[1 + cte_start + i] = cte1 - ((f0 - y0) + (v0 * CppAD::sin(epsi0) * (dt + latency)));
       fg[1 + epsi_start + i] = epsi1 - ((psi0 - psides0) + v0 * delta0 / Lf * (dt + latency));

@@ -158,7 +158,7 @@ int main() {
           }
 
           json msgJson;
-          msgJson["steering_angle"] = steer_value / deg2rad(25);
+          msgJson["steering_angle"] = -steer_value / deg2rad(25);
           msgJson["throttle"] = throttle_value;
 
           msgJson["next_x"] = next_x_vals;

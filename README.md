@@ -30,14 +30,14 @@ Line 103 - 109 in MPC.cpp reflects the model update in the code.
 
 ## Timestep Length and Elapsed Duration
 
-Time horizon T = N * dt here N is 10 and dt is 0.1. Other combinations have been tried were proven that easy to cause the car behavior wierd. A length of 100ms time step is also consistent with latency.
+Time horizon T = N * dt here N is 10 and dt is 0.1. Other combinations have been tried were proven that easy to cause the car behavior wierd. A length of 100ms time step is also consistent with latency. We need a small dt to provide a good resolution in calculation regards of accuracy, large values of dt will cause discretization error. However if the dt is too small, the computational time would be large and it might cause asynchronous error. 1 sec for the Time horizon looks good considering about the car's speed - environment change beyond it doesnot make the prediction any sense. 
 
 
 ## Polynomial Fitting and MPC Preprocessing
 From line 99 - 120 in main.cpp, I preprocessed waypoints to vehicle's cordinate system also with state vector, then used the provide utils to fitting the polynomial. 
 
 ## Model Predictive Control with Latency
-Since the timestep and latency is consistent, which is 100ms, we are able to use previous step's actuations to apply to current step.
+Since the timestep and latency is consistent, which is 100ms, we are able to use previous step's actuations to apply to current step. In the init state it takes the original actuations, after that it will takes previous step.(MPC.cpp : Line 96-97)
 
 
 ## Simulation
