@@ -7,6 +7,7 @@ Self-Driving Car Engineer Nanodegree Program
 This project could be compile build and run well on Linux(ubuntu) by following instructions provided. 
 
 ## The Model 
+(If MathJax is not supported, please read PDF version to see these equations clearly).
 For the car with a state vector S = $(x, y, \psi, v)$. The kinematic model can be expressed as following equations:
 
 $$ x_t = x_{t-1} + v_{t-1} * \cos(\psi_{t-1}) * dt $$
